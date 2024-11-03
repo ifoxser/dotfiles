@@ -151,3 +151,4 @@ alias config='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxs
 
 config add .
 config status
+
