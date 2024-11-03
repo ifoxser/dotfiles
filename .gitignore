@@ -1,0 +1,10 @@
+*
+!.gitconfig
+!.gitignore
+!.config/
+!.config/**
+!.bashrc
+!.p10k.zsh
+!.profile
+!.tmux.conf.local
+!.zshrc
