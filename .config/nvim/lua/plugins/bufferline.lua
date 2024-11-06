@@ -16,6 +16,11 @@ return {
       desc = "Previous buffer",
     },
     {
+      "<leader>bb",
+      "<Cmd>BufferLinePick<CR>",
+      desc = "Buffer Line Pick",
+    },
+    {
       "]b",
       function()
         vim.cmd("bnext " .. vim.v.count1)
@@ -33,6 +38,13 @@ return {
       "<leader><delete>",
       LazyVim.ui.bufremove,
       desc = "Close current buffer",
+    },
+  },
+  opts = {
+    options = {
+      -- separator_style = "thick",
+      diagnostics = "",
+      -- always_show_bufferline = true,
     },
   },
 }
