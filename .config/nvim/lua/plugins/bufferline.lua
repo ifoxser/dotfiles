@@ -36,7 +36,9 @@ return {
     },
     {
       "<leader><delete>",
-      LazyVim.ui.bufremove,
+      function()
+        require("snacks").bufdelete()
+      end,
       desc = "Close current buffer",
     },
   },
