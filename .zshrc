@@ -8,10 +8,6 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# export path
-export PATH=/opt/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -117,38 +113,66 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# bindkey (p10k)
+# key map
 bindkey '^_' autosuggest-accept
-
+# Set up fzf key bindings and fuzzy completion
+source <(~/.local/bin/fzf --zsh)
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~'
+# Set fzf catppuccin macchiato theme
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+--color=selected-bg:#494d64 \
+--multi"
+# Options to fzf command
+export FZF_COMPLETION_OPTS='--border --info=inline'
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+	fd --hidden --follow -E ".git*" -E ".repo" -u . "$1"
+}
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+	fd --type d --hidden --follow -E ".git*" -E ".repo" -u . "$1"
+}
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
 # alias
 alias ni="nvim"
 alias cat="bat --paging=never"
 alias cl="clear"
-
-# proxy
-host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
-export ALL_PROXY="socks5://$host_ip:7890"
-
-# for npm
-#npm config set proxy http://$host_ip:7890
-#npm config set https-proxy http://$host_ip:7890
-
-# for trem color
+alias ssbuild="ssbuild.sh"
+alias minicom="sudo /usr/bin/minicom"
+# terminal color
 if [[ -n $TMUX ]]; then
   export TERM=tmux-256color
 else
   export TERM=xterm-256color
 fi
 
+# export path
+export PATH=$HOME/software/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=/opt/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+
+
 # Dotfiles mange
 alias config='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxser'
-
-# # disabled the underline for zsh-syntax-highlighting
-# (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
-# ZSH_HIGHLIGHT_STYLES[path]=none
-# ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-# ZSH_HIGHLIGHT_STYLES[precommand]=none
-
 config add .
 config status
 

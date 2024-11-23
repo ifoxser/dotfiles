@@ -1,3 +1,5 @@
 [user]
 	email = tifoxser@gmail.com
 	name = ifoxser
+[core]
+	editor = nvim
