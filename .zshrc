@@ -153,7 +153,7 @@ _fzf_comprun() {
 }
 # alias
 alias ni="nvim"
-alias cat="bat --paging=never"
+alias at="bat --paging=never"
 alias cl="clear"
 alias ssbuild="ssbuild.sh"
 alias minicom="sudo /usr/bin/minicom"
@@ -170,9 +170,16 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=/opt/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
+# proxy
+host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+export ALL_PROXY="socks5://$host_ip:7890"
+
+# for npm
+#npm config set proxy http://$host_ip:7890
+#npm config set https-proxy http://$host_ip:7890
 
 # Dotfiles mange
 alias config='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxser'
-config add .
+config add $HOME
 config status
 
