@@ -4,3 +4,6 @@
 
 vim.keymap.set("n", "J", "4j", { desc = "Move down 4 lines" })
 vim.keymap.set("n", "K", "4k", { desc = "Move up 4 lines" })
+
+vim.keymap.set("v", "J", "4j", { desc = "Move down 4 lines" })
+vim.keymap.set("v", "K", "4k", { desc = "Move up 4 lines" })
