@@ -8,3 +8,5 @@
 !.profile
 !.tmux.conf.local
 !.zshrc
+!.czrc
+!.cz-config.js
