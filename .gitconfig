@@ -3,3 +3,5 @@
 	name = ifoxser
 [core]
 	editor = nvim
+[color]
+	ui = auto
