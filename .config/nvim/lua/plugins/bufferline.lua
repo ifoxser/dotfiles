@@ -2,20 +2,6 @@ return {
   "akinsho/bufferline.nvim",
   keys = {
     {
-      "L",
-      function()
-        vim.cmd("bnext " .. vim.v.count1)
-      end,
-      desc = "Next buffer",
-    },
-    {
-      "H",
-      function()
-        vim.cmd("bprev " .. vim.v.count1)
-      end,
-      desc = "Previous buffer",
-    },
-    {
       "<leader>bb",
       "<Cmd>BufferLinePick<CR>",
       desc = "Buffer Line Pick",

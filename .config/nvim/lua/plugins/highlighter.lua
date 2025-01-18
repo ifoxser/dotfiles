@@ -47,7 +47,8 @@ return {
         {
           "<leader>hf",
           function()
-            vim.cmd('call feedkeys(":Hi/Find  %<Left><Left>","n")')
+            local keys = vim.api.nvim_replace_termcodes(":Hi/Find  %<Left><Left>", true, false, true)
+            vim.fn.feedkeys(keys, "n")
           end,
           desc = "Find Highlight",
           mode = { "n", "v" },

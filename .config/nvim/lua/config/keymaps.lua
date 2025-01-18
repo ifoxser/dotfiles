@@ -2,8 +2,28 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set("n", "J", "4j", { desc = "Move down 4 lines" })
-vim.keymap.set("n", "K", "4k", { desc = "Move up 4 lines" })
+vim.keymap.set({ "n", "v" }, "K", function()
+  local count = vim.v.count1
+  local multiplier = vim.v.count == 0 and 4 or 10 -- Use 4 when no count is given, use 10 when count exists
+  vim.cmd(string.format("normal! %dk", count * multiplier))
+end, { desc = "Move up 4 lines" })
 
-vim.keymap.set("v", "J", "4j", { desc = "Move down 4 lines" })
-vim.keymap.set("v", "K", "4k", { desc = "Move up 4 lines" })
+vim.keymap.set({ "n", "v" }, "J", function()
+  local count = vim.v.count1
+  local multiplier = vim.v.count == 0 and 4 or 10 -- Use 4 when no count is given, use 10 when count exists
+  vim.cmd(string.format("normal! %dj", count * multiplier))
+end, { desc = "Move down 4 lines" })
+
+vim.keymap.set({ "n", "v" }, "H", function()
+  local count = vim.v.count1
+  local multiplier = vim.v.count == 0 and 4 or 10 -- Use 4 when no count is given, use 10 when count exist
+  vim.cmd(string.format("normal! %dh", count * multiplier))
+end, { desc = "Move left 4 chars" })
+
+vim.keymap.set({ "n", "v" }, "L", function()
+  local count = vim.v.count1
+  local multiplier = vim.v.count == 0 and 4 or 10 -- Use 4 when no count is given, use 10 when count exists
+  vim.cmd(string.format("normal! %dl", count * multiplier))
+end, { desc = "Move right 4 chars" })
+
+vim.keymap.set("n", "<leader>ww", "<C-w>q", { desc = "Quit a window" })
