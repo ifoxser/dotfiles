@@ -1,0 +1,37 @@
+# <type>(<scope>): <subject>
+#   |      |         |
+#   |      |         +-> Summary in present tense (not capitalized, no period)
+#   |      |
+#   |      +-> Scope:
+#   |          Editor: nvim|vscode|idea
+#   |          Terminal: tmux|alacritty|kitty|wezterm
+#   |          Shell: zsh|bash|fish
+#   |          VCS: git|github|gitlab
+#   |
+#   +-> Type: feat|fix|docs|style|refactor|conf|test|chore
+#
+# [optional body]
+# - why was this change necessary?
+# - what side effects does this change have?
+# - more detailed description of the change
+#
+# [optional footer]
+# BREAKING CHANGE: <description>
+# Closes|Fixes|Resolves #<issue number>
+# Co-authored-by: name <email>
+#
+# Examples:
+# feat(nvim): add telescope fuzzy finder
+# fix(tmux): resolve session restore issue
+# conf(zsh): update plugin configuration
+#
+# Full example with body and footer:
+# feat(nvim): add new LSP configuration
+#
+# - added native LSP support for C/C++
+# - configured clangd as the default LSP server
+# - improved diagnostic display
+#
+# BREAKING CHANGE: requires Neovim 0.8+
+# Closes #123
+

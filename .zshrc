@@ -180,6 +180,7 @@ export ALL_PROXY="socks5://$host_ip:7890"
 
 # Dotfiles mange
 alias config='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxser'
+alias config-lg='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
 config add $HOME
 config status
 

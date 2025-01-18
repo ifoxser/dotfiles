@@ -3,5 +3,8 @@
 	name = ifoxser
 [core]
 	editor = nvim
+	hooksPath = ~/.config/git/hooks
 [color]
 	ui = auto
+[commit]
+	template = ~/.config/git/.gitmessage
