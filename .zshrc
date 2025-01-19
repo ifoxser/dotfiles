@@ -184,3 +184,5 @@ alias config-lg='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
 config add $HOME
 config status
 
+# rg config
+export RIPGREP_CONFIG_PATH="$HOME/.config/rg/.ripgreprc"

@@ -3,12 +3,18 @@ return {
   opts = {
     filesystem = {
       filtered_items = {
-        -- visible = true,
         hide_dotfiles = false,
         hide_gitignored = false,
         hide_by_pattern = {
-          ".github*",
-          ".gitignore*",
+          -- directories
+          "*.git",
+          "*.git*",
+          "*.repo",
+          "*.cache",
+          "*_cacache",
+          "*.vscode-server",
+          -- files
+          "*.git*",
           "*.o",
           "*.cmd",
         },

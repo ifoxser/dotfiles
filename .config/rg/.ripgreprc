@@ -1,0 +1,21 @@
+# Search hidden files and directories.
+--hidden
+
+# Don't use ignore files from source control.
+--no-ignore-vcs
+
+# Because who cares about case!?
+--smart-case
+
+# Using glob patterns to include/exclude files or folders
+# directories
+--glob=!**/.git/**
+--glob=!**/.git*/**
+--glob=!**/.repo/**
+--glob=!**/.cache/**
+--glob=!**/_cacache/**
+--glob=!**/.vscode-server/**
+# files
+--glob=!**/.git*
+--glob=!**/*.o
+--glob=!**/*.cmd

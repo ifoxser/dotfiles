@@ -1,0 +1,29 @@
+# ---------------------------------------------------------------------
+# fd command configuration
+# ---------------------------------------------------------------------
+# Created a wrapper script for fd-xx.xx with default flags:
+#    - --hidden:          Search hidden files and directories
+#    - --no-ignore-vcs:   Don't respect .gitignore
+#    - --follow:          Follow symbolic links
+#    - Smart case is enabled by default (no need for --smart-case)
+#
+# Script content (saved as 'fd'):
+# #!/bin/bash
+# exec fd-10.2.0 --hidden --no-ignore-vcs --follow "$@"
+#
+# Note: Original binary renamed to fd-xx.xx to avoid conflicts
+#       and ensure version consistency
+# ---------------------------------------------------------------------
+
+
+# directories
+.git/
+.git*/
+.repo/
+.cache/
+_cacache/
+.vscode-server/
+# files
+.git*
+*.o
+*.cmd
