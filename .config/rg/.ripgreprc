@@ -19,3 +19,7 @@
 --glob=!**/.git*
 --glob=!**/*.o
 --glob=!**/*.cmd
+--glob=!**/*.arm.d
+--glob=!**/*.arm.o
+--glob=!**/*.mod
+--glob=!**/*.mod.c

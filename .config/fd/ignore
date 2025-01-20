@@ -15,15 +15,18 @@
 #       and ensure version consistency
 # ---------------------------------------------------------------------
 
-
 # directories
-.git/
-.git*/
-.repo/
-.cache/
-_cacache/
-.vscode-server/
+**/.git/**
+**/.git*/**
+**/.repo/**
+**/.cache/**
+**/_cacache/**
+**/.vscode-server/**
 # files
-.git*
-*.o
-*.cmd
+**/.git*
+**/*.o
+**/*.cmd
+**/*.arm.d
+**/*.arm.o
+**/*.mod
+**/*.mod.c
