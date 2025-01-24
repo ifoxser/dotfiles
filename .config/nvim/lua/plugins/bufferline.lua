@@ -7,14 +7,14 @@ return {
       desc = "Buffer Line Pick",
     },
     {
-      "]b",
+      "]<space>",
       function()
         vim.cmd("bnext " .. vim.v.count1)
       end,
       desc = "Next buffer",
     },
     {
-      "[b",
+      "[<space>",
       function()
         vim.cmd("bprev " .. vim.v.count1)
       end,
@@ -30,9 +30,8 @@ return {
   },
   opts = {
     options = {
-      -- separator_style = "thick",
       diagnostics = "",
-      -- always_show_bufferline = true,
+      always_show_bufferline = true,
     },
   },
 }
