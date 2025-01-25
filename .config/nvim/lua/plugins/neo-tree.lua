@@ -23,13 +23,9 @@ return {
           "*.mod.c",
         },
       },
+      window = {
+        width = "18%",
+      },
     },
   },
-  -- keys = {
-  --   {
-  --     "<leader>sO",
-  --     "<cmd>Neotree document_symbols<cr>",
-  --     desc = "Document Symbols (Neo-tree)",
-  --   },
-  -- },
 }
