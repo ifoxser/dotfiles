@@ -11,10 +11,10 @@ return {
       vim.g.HiErase = "<leader>hr"
       vim.g.HiClear = "<leader>ha"
       vim.g.HiFind = "<leader>hf"
-      vim.g.HiSetSL = "<leader>hl"
+      vim.g.HiSetSL = "<leader>he"
       vim.g.HiSyncMode = 3
-      vim.g.HiKeywords = "~/.cache/highlighter/keywords"
-      vim.g.HiFindTool = "ag --nocolor --noheading --column --nobreak"
+      vim.g.HiKeywords = "~/.cache/nvim/highlighter/keywords"
+      vim.g.HiFindTool = "rg -H --color=never --no-heading --column --smart-case"
 
       -- which-key setting
       local function get_unique_hlname_with_timestamp()
@@ -28,7 +28,7 @@ return {
         local timestamp = os.date("%Y%m%d_%H%M%S")
 
         -- Check HiKeywords path
-        local hl_dir = vim.g.HiKeywords or vim.fn.expand("~/.cache/highlighter/keywords")
+        local hl_dir = vim.g.HiKeywords or vim.fn.expand("~/.cache/nvim/highlighter/keywords")
         if vim.fn.isdirectory(vim.fn.expand(hl_dir)) == 0 then
           vim.fn.mkdir(vim.fn.expand(hl_dir), "p")
         end
@@ -43,7 +43,7 @@ return {
         { "<leader>hh", desc = "Highlight Word", mode = { "n", "v" }, icon = "󰸱" },
         { "<leader>hr", desc = "Remove Highlight", mode = { "n", "v" }, icon = "󰇾" },
         { "<leader>ha", desc = "Clear All Highliht", mode = { "n", "v" }, icon = "" },
-        { "<leader>hl", desc = "Highlight Line", mode = { "n", "v" }, icon = "" },
+        { "<leader>he", desc = "Highlight Line", mode = { "n", "v" }, icon = "" },
         {
           "<leader>hf",
           function()
@@ -56,7 +56,7 @@ return {
         },
         {
           --  Cmd ( :Hi <> ) change pattern between <cword> or <cWORD>
-          "<leader>hi",
+          "<leader>ho",
           function()
             vim.cmd("Hi - ")
             -- For some mysterious reason, without this delay the second command won't work properly.
@@ -79,7 +79,7 @@ return {
           icon = "󰆓",
         },
         {
-          "<leader>ho",
+          "<leader>hl",
           function()
             vim.cmd('call feedkeys(":Hi load ", "n")')
           end,
