@@ -114,6 +114,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# Dotfiles manger
-alias config='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxser'

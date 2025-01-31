@@ -1,3 +1,6 @@
+###############################################################################
+#                             POWERLEVEL10K PROMPT                            #
+###############################################################################
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,6 +8,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
+###############################################################################
+#                             OH-MY-ZSH SETTINGS                              #
+###############################################################################
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -72,6 +79,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+
+###############################################################################
+#                                 PLUGINS                                     #
+###############################################################################
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -81,8 +92,10 @@ plugins=(git z zsh-autosuggestions extract zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
 
+###############################################################################
+#                           USER CONFIGURATION                                #
+###############################################################################
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -98,23 +111,17 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+###############################################################################
+#                             KEY BINDINGS                                    #
+###############################################################################
 # key map
-bindkey '^_' autosuggest-accept
+bindkey '^F' autosuggest-accept
+
+
+###############################################################################
+#                              FZF SETTINGS                                   #
+###############################################################################
 # Set up fzf key bindings and fuzzy completion
 source <(~/.local/bin/fzf --zsh)
 # Use ~~ as the trigger sequence instead of the default **
@@ -132,11 +139,11 @@ export FZF_COMPLETION_OPTS='--border --info=inline'
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
-	fd --hidden --follow -E ".git*" -E ".repo" -u . "$1"
+    fd --hidden --follow -E ".git*" -E ".repo" -u . "$1"
 }
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-	fd --type d --hidden --follow -E ".git*" -E ".repo" -u . "$1"
+    fd --type d --hidden --follow -E ".git*" -E ".repo" -u . "$1"
 }
 # Advanced customization of fzf options via _fzf_comprun function
 # - The first argument to the function is the name of the command.
@@ -152,14 +159,32 @@ _fzf_comprun() {
   esac
 }
 
-# alias
+
+###############################################################################
+#                                ALIASES                                      #
+###############################################################################
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
 alias ni="nvim"
 alias at="bat --paging=never"
 alias cl="clear"
 alias ssbuild="ssbuild.sh"
 alias minicom="sudo /usr/bin/minicom"
 
-# terminal color
+
+###############################################################################
+#                            TERMINAL SETTINGS                                #
+###############################################################################
 if [[ -n $TMUX ]]; then
   export TERM=tmux-256color
   if [[ -n "$NVIM" ]]; then
@@ -169,18 +194,23 @@ if [[ -n $TMUX ]]; then
     # DISABLE_LINE_INIT=true
     # 3. Disable automatic terminal title updates to avoid output interference
     DISABLE_AUTO_TITLE=true
-fi
+  fi
 else
   export TERM=xterm-256color
 fi
 
-# export path
+
+###############################################################################
+#                             PATH EXPORTS                                    #
+###############################################################################
 export PATH=$HOME/software/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=/opt/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
 
-# proxy
+
+###############################################################################
+#                             PROXY SETTINGS                                  #
+###############################################################################
 host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
 export ALL_PROXY="socks5://$host_ip:7890"
 
@@ -188,11 +218,25 @@ export ALL_PROXY="socks5://$host_ip:7890"
 #npm config set proxy http://$host_ip:7890
 #npm config set https-proxy http://$host_ip:7890
 
-# Dotfiles mange
-alias config='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxser'
-alias config-lg='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
-config add $HOME
-config status
 
-# rg config
+###############################################################################
+#                           DOTFILES MANAGEMENT                               #
+###############################################################################
+alias con='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxser'
+alias conl='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
+con add $HOME
+con status
+
+
+###############################################################################
+#                           RIPGREP CONFIGURATION                            #
+###############################################################################
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/.ripgreprc"
+
+
+###############################################################################
+#                           P10K CONFIGURATION                                #
+###############################################################################
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
