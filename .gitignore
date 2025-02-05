@@ -6,5 +6,7 @@
 !.bashrc
 !.p10k.zsh
 !.profile
+!.tmux.conf
 !.tmux.conf.local
+!.gitsubmodules.tar.gz
 !.zshrc
