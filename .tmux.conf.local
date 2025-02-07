@@ -406,7 +406,7 @@ bind-key -n M-k if -F "#{@pane-is-vim}" 'send-keys M-k' 'resize-pane -U 3'
 bind-key -n M-l if -F "#{@pane-is-vim}" 'send-keys M-l' 'resize-pane -R 3'
 
 # increase history size
-#set -g history-limit 10000
+set -g history-limit 10000
 
 # start with mouse mode enabled
 set -g mouse on
@@ -473,7 +473,7 @@ set -g @plugin 'tmux-plugins/tmux-net-speed'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 
-set -g @catppuccin_flavor 'frappe'
+set -g @catppuccin_flavor 'macchiato'
 set -g @catppuccin_window_status_style "custom"  #basic/rounded/slanted/none/custom
 set -g @catppuccin_window_left_separator "█"
 set -g @catppuccin_window_middle_separator "█"
@@ -483,7 +483,6 @@ set -g @catppuccin_status_background "none"
 set -g @catppuccin_status_left_separator " "
 set -g @catppuccin_status_right_separator ""
 set -g @catppuccin_status_connect_separator "no"
-set -g @catppuccin_status_background "none"
 set -g @catppuccin_date_time_text "%m-%d %I:%M %p"
 set -g @catppuccin_session_text "#S - #(whoami)"
 #set -g @catppuccin_pane_border_style "fg=#{@thm_surface_0}"
