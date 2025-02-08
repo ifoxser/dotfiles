@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------
 # fd command configuration
 # ---------------------------------------------------------------------
-# Created a wrapper script for fd-xx.xx with default flags:
+# Created a wrapper script for fd-xxx with default flags:
 #    - --hidden:          Search hidden files and directories
 #    - --no-ignore-vcs:   Don't respect .gitignore
 #    - --follow:          Follow symbolic links
@@ -9,10 +9,9 @@
 #
 # Script content (saved as 'fd'):
 # #!/bin/bash
-# exec fd-10.2.0 --hidden --no-ignore-vcs --follow "$@"
+# exec fd-release --hidden --no-ignore-vcs --follow "$@"
 #
-# Note: Original binary renamed to fd-xx.xx to avoid conflicts
-#       and ensure version consistency
+# Note: Original binary renamed to fd-xxx to avoid conflicts
 # ---------------------------------------------------------------------
 
 # directories

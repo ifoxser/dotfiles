@@ -9,6 +9,7 @@
 #   |          Terminal: tmux|alacritty|kitty|wezterm
 #   |          Shell: zsh|bash|fish
 #   |          VCS: git|github|gitlab
+#   |          Others: other
 #   |
 #   +-> Type: feat|fix|docs|style|refactor|conf|test|chore
 #

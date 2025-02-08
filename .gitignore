@@ -10,3 +10,6 @@
 !.tmux.conf.local
 !.gitsubmodules.tar.gz
 !.zshrc
+!.local/
+!.local/bin/
+!.local/bin/fd

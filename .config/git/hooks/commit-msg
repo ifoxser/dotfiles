@@ -2,6 +2,12 @@
 
 commit_msg_file=$1
 
+# Initialize and store the full commit message, excluding comment lines
+full_message=''
+if [ -f "$commit_msg_file" ]; then
+    full_message=$(grep -v '^#' "$commit_msg_file" | sed '/^$/d')
+fi
+
 # Only check the first line
 first_line=$(head -n1 "$commit_msg_file")
 
@@ -13,6 +19,16 @@ scopes="nvim|vscode|idea|tmux|alacritty|kitty|wezterm|zsh|bash|fish|git|github|g
 
 # Commit message format regex
 format_regex="^(${types})\((${scopes})\): .+"
+
+# Function to print commit message
+print_commit_message() {
+    printf "\n=== Your Commit Message ===\n"
+    printf "%s\n" "$full_message"
+    printf "==========================\n\n"
+}
+
+# Always print the commit message first
+print_commit_message
 
 if ! echo "$first_line" | grep -qE "$format_regex"; then
     echo "ERROR: Invalid commit message format in subject line."
