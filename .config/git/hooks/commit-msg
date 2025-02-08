@@ -12,7 +12,7 @@ types="feat|fix|docs|style|refactor|conf|test|chore"
 scopes="nvim|vscode|idea|tmux|alacritty|kitty|wezterm|zsh|bash|fish|git|github|gitlab|other"
 
 # Commit message format regex
-format_regex="^(${types})(\\(${scopes}\\))?: .+"
+format_regex="^(${types})\((${scopes})\): .+"
 
 if ! echo "$first_line" | grep -qE "$format_regex"; then
     echo "ERROR: Invalid commit message format in subject line."
@@ -22,9 +22,9 @@ if ! echo "$first_line" | grep -qE "$format_regex"; then
     echo "Valid scopes: ${scopes}"
     echo ""
     echo "Examples:"
-    echo "feat(nvim): add new plugin configuration"
-    echo "fix(tmux): resolve session restore issue"
     echo "conf(zsh): update plugin settings"
+    echo "fix(tmux): resolve session restore issue"
+    echo "feat(nvim): add new plugin configuration"
     exit 1
 fi
 

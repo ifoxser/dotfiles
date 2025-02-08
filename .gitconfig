@@ -2,7 +2,7 @@
 	email = tifoxser@gmail.com
 	name = ifoxser
 [core]
-	editor = nvim
+	editor = nvim -c 'startinsert' -c 'normal! gg'
 	hooksPath = ~/.config/git/hooks
 [color]
 	ui = auto

@@ -1,3 +1,5 @@
+
+
 # <type>(<scope>): <subject>
 #   |      |         |
 #   |      |         +-> Summary in present tense (not capitalized, no period)
@@ -34,4 +36,3 @@
 #
 # BREAKING CHANGE: requires Neovim 0.8+
 # Closes #123
-
