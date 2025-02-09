@@ -222,7 +222,7 @@ export ALL_PROXY="socks5://$host_ip:7890"
 ###############################################################################
 #                           DOTFILES MANAGEMENT                               #
 ###############################################################################
-alias con='/usr/bin/git --git-dir=/home/ifoxser/.cfg/ --work-tree=/home/ifoxser'
+alias con='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias conl='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
 con add $HOME
 con status

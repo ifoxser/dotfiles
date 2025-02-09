@@ -2,8 +2,8 @@ return {
   "folke/snacks.nvim",
   opts = {
     terminal = {
-      -- Check $SHELL
-      shell = { "/usr/bin/zsh", "-l" },
+      -- Check $SHELL environment is correct
+      shell = { "zsh", "-l" },
     },
   },
 }
