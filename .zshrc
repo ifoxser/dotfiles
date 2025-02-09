@@ -180,6 +180,9 @@ alias at="bat --paging=never"
 alias cl="clear"
 alias ssbuild="ssbuild.sh"
 alias minicom="sudo /usr/bin/minicom"
+alias px="proxy_status"
+alias px_on="proxy_on"
+alias px_off="proxy_off"
 
 
 ###############################################################################
@@ -211,13 +214,54 @@ export PATH=/opt/bin:$PATH
 ###############################################################################
 #                             PROXY SETTINGS                                  #
 ###############################################################################
+# Get WSL host IP
 host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
-export ALL_PROXY="socks5://$host_ip:7890"
 
-# for npm
-#npm config set proxy http://$host_ip:7890
-#npm config set https-proxy http://$host_ip:7890
+# Define proxy control functions
+proxy_on() {
+    # Set system proxy
+    export ALL_PROXY="socks5://$host_ip:7890"
+    export HTTP_PROXY="http://$host_ip:7890"
+    export HTTPS_PROXY="http://$host_ip:7890"
+    # Lower case versions for some applications
+    export http_proxy="http://$host_ip:7890"
+    export https_proxy="http://$host_ip:7890"
 
+    # Set npm proxy
+    npm config set proxy "http://$host_ip:7890"
+    npm config set https-proxy "http://$host_ip:7890"
+
+    echo "Proxy is turned on for system and npm"
+}
+
+proxy_off() {
+    # Unset system proxy
+    unset ALL_PROXY
+    unset HTTP_PROXY
+    unset HTTPS_PR
+    unset http_proxy
+    unset https_proxyOXY
+
+    # Unset npm proxy
+    npm config delete proxy
+    npm config delete https-proxy
+
+    echo "Proxy is turned off for system and npm"
+}
+
+# Check current proxy status
+proxy_status() {
+    echo "System Proxy:"
+    echo "ALL_PROXY: $ALL_PROXY"
+    echo "HTTP_PROXY: $HTTP_PROXY"
+    echo "HTTPS_PROXY: $HTTPS_PROXY"
+    echo
+    echo "NPM Proxy:"
+    npm config get proxy
+    npm config get https-proxy
+}
+
+proxy_on
 
 ###############################################################################
 #                           DOTFILES MANAGEMENT                               #
