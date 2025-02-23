@@ -7,4 +7,9 @@
 [color]
 	ui = auto
 [commit]
-	template = ~/.config/git/.gitmessage
+	template = ~/.config/git/message
+[delta]
+	syntax-theme = Catppuccin Macchiato
+	side-by-side = true
+	line-numbers = true
+	navigate = true

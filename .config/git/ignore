@@ -8,7 +8,7 @@
 !.profile
 !.tmux.conf
 !.tmux.conf.local
-!.gitsubmodules.tar.gz
+!.others_dotfiles.tar.gz
 !.zshrc
 !.local/
 !.local/bin/
