@@ -212,7 +212,7 @@ export PATH=/opt/bin:$PATH
 
 
 ###############################################################################
-#                             PROXY SETTINGS                                  #
+#                             PROXY SETTINGS                                    #
 ###############################################################################
 # Get WSL host IP
 host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
@@ -220,6 +220,7 @@ host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
 # Define proxy control functions
 proxy_on() {
     # Set system proxy
+    echo "Setting system proxy..."
     export ALL_PROXY="socks5://$host_ip:7890"
     export HTTP_PROXY="http://$host_ip:7890"
     export HTTPS_PROXY="http://$host_ip:7890"
@@ -227,26 +228,39 @@ proxy_on() {
     export http_proxy="http://$host_ip:7890"
     export https_proxy="http://$host_ip:7890"
 
+    # Set git proxy (using environment variables)
+    echo "Setting git proxy..."
+    export GIT_HTTP_PROXY="$host_ip:7890"
+    export GIT_HTTPS_PROXY="$host_ip:7890"
+
     # Set npm proxy
+    echo "Setting npm proxy..."
     npm config set proxy "http://$host_ip:7890"
     npm config set https-proxy "http://$host_ip:7890"
 
-    echo "Proxy is turned on for system and npm"
+    echo "All proxies have been enabled"
 }
 
 proxy_off() {
     # Unset system proxy
+    echo "Unsetting system proxy..."
     unset ALL_PROXY
     unset HTTP_PROXY
-    unset HTTPS_PR
+    unset HTTPS_PROXY
     unset http_proxy
-    unset https_proxyOXY
+    unset https_proxy
+
+    # Unset git proxy
+    echo "Unsetting git proxy..."
+    unset GIT_HTTP_PROXY
+    unset GIT_HTTPS_PROXY
 
     # Unset npm proxy
+    echo "Unsetting npm proxy..."
     npm config delete proxy
     npm config delete https-proxy
 
-    echo "Proxy is turned off for system and npm"
+    echo "All proxies have been disabled"
 }
 
 # Check current proxy status
@@ -256,6 +270,10 @@ proxy_status() {
     echo "HTTP_PROXY: $HTTP_PROXY"
     echo "HTTPS_PROXY: $HTTPS_PROXY"
     echo
+    echo "Git Proxy:"
+    echo "GIT_HTTP_PROXY: $GIT_HTTP_PROXY"
+    echo "GIT_HTTPS_PROXY: $GIT_HTTPS_PROXY"
+    echo
     echo "NPM Proxy:"
     npm config get proxy
     npm config get https-proxy
@@ -263,9 +281,11 @@ proxy_status() {
 
 proxy_on
 
+
 ###############################################################################
 #                           DOTFILES MANAGEMENT                               #
 ###############################################################################
+export XDG_CONFIG_HOME="$HOME/.config"
 alias con='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias conl='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
 con add $HOME
