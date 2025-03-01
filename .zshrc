@@ -220,7 +220,7 @@ host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
 # Define proxy control functions
 proxy_on() {
     # Set system proxy
-    echo "Setting system proxy..."
+    echo "Setting proxy for system..."
     export ALL_PROXY="socks5://$host_ip:7890"
     export HTTP_PROXY="http://$host_ip:7890"
     export HTTPS_PROXY="http://$host_ip:7890"
@@ -229,12 +229,12 @@ proxy_on() {
     export https_proxy="http://$host_ip:7890"
 
     # Set git proxy (using environment variables)
-    echo "Setting git proxy..."
+    echo "Setting proxy for git..."
     export GIT_HTTP_PROXY="$host_ip:7890"
     export GIT_HTTPS_PROXY="$host_ip:7890"
 
     # Set npm proxy
-    echo "Setting npm proxy..."
+    echo "Setting proxy for npm..."
     npm config set proxy "http://$host_ip:7890"
     npm config set https-proxy "http://$host_ip:7890"
 
@@ -243,20 +243,21 @@ proxy_on() {
 
 proxy_off() {
     # Unset system proxy
-    echo "Unsetting system proxy..."
+    echo "Unsetting proxy for system..."
     unset ALL_PROXY
     unset HTTP_PROXY
     unset HTTPS_PROXY
+    # Lower case versions for some applications
     unset http_proxy
     unset https_proxy
 
     # Unset git proxy
-    echo "Unsetting git proxy..."
+    echo "Unsetting proxy for git..."
     unset GIT_HTTP_PROXY
     unset GIT_HTTPS_PROXY
 
     # Unset npm proxy
-    echo "Unsetting npm proxy..."
+    echo "Unsetting proxy for npm..."
     npm config delete proxy
     npm config delete https-proxy
 
@@ -269,6 +270,9 @@ proxy_status() {
     echo "ALL_PROXY: $ALL_PROXY"
     echo "HTTP_PROXY: $HTTP_PROXY"
     echo "HTTPS_PROXY: $HTTPS_PROXY"
+    # Lower case versions for some applications
+    echo "http_proxy: $http_proxy"
+    echo "https_proxy: $https_proxy"
     echo
     echo "Git Proxy:"
     echo "GIT_HTTP_PROXY: $GIT_HTTP_PROXY"

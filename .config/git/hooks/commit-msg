@@ -2,6 +2,13 @@
 
 commit_msg_file=$1
 
+# ANSI color codes
+GREEN=$(printf '\033[0;32m')
+RED=$(printf '\033[0;31m')
+YELLOW=$(printf '\033[0;33m')
+BOLD=$(printf '\033[1m')
+RESET=$(printf '\033[0m')
+
 # Initialize and store the full commit message, excluding comment lines
 full_message=''
 if [ -f "$commit_msg_file" ]; then
@@ -22,30 +29,36 @@ format_regex="^(${types})\((${scopes})\): .+"
 
 # Function to print commit message
 print_commit_message() {
-    printf "\n=== Your Commit Message ===\n"
-    printf "%s\n" "$full_message"
-    printf "==========================\n\n"
+    echo
+    echo "${BOLD}=== Your Commit Message ===${RESET}"
+    echo "$full_message"
+    echo "${BOLD}===========================${RESET}"
+    echo
 }
 
 # Always print the commit message first
 print_commit_message
 
 if ! echo "$first_line" | grep -qE "$format_regex"; then
-    echo "ERROR: Invalid commit message format in subject line."
-    echo "Format: <type>(<scope>): <subject>"
-    echo ""
-    echo "Valid types: ${types}"
-    echo "Valid scopes: ${scopes}"
-    echo ""
-    echo "Examples:"
-    echo "conf(zsh): update plugin settings"
-    echo "fix(tmux): resolve session restore issue"
-    echo "feat(nvim): add new plugin configuration"
+    echo "${RED}${BOLD}× ERROR: Invalid commit message format in subject line.${RESET}"
+    echo "${BOLD}Format: <type>(<scope>): <subject>${RESET}"
+    echo
+    echo "${BOLD}Valid types: ${types}${RESET}"
+    echo "${BOLD}Valid scopes: ${scopes}${RESET}"
+    echo
+    echo "${BOLD}Examples:${RESET}"
+    echo "  ${YELLOW}conf(zsh): update plugin settings${RESET}"
+    echo "  ${YELLOW}fix(tmux): resolve session restore issue${RESET}"
+    echo "  ${YELLOW}feat(nvim): add new plugin configuration${RESET}"
     exit 1
 fi
 
 # Only check the length of the first line
 if [ ${#first_line} -gt 72 ]; then
-    echo "ERROR: Subject line too long (max 72 characters)"
+    echo "${RED}${BOLD}ERROR: Subject line too long (max 72 characters)${RESET}"
     exit 1
 fi
+
+# If we get here, the commit message is valid
+echo "${GREEN}${BOLD}✓ Commit message format is valid!${RESET}"
+exit 0

@@ -24,7 +24,7 @@ return {
         },
       },
       window = {
-        width = "18%",
+        width = "17%",
       },
     },
   },
