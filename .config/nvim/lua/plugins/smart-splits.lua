@@ -1,6 +1,13 @@
 return {
   "mrjones2014/smart-splits.nvim",
   lazy = false,
+
+  opts = {
+    ignored_filetypes = {},
+    ignored_buftypes = {},
+    at_edge = "stop",
+  },
+
   keys = {
     {
       "<A-h>",
