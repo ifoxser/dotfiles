@@ -14,7 +14,7 @@ return {
       vim.g.HiSetSL = "<leader>he"
       vim.g.HiSyncMode = 3
       vim.g.HiKeywords = "~/.cache/nvim/highlighter/keywords"
-      vim.g.HiFindTool = "rg -H --color=never --no-heading --column --smart-case"
+      vim.g.HiFindTool = "rg --color=never --no-heading --column --smart-case"
 
       -- which-key setting
       local function get_unique_hlname_with_timestamp()
