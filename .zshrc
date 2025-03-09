@@ -215,7 +215,7 @@ export PATH=/opt/bin:$PATH
 #                             PROXY SETTINGS                                    #
 ###############################################################################
 # Get WSL host IP
-host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+host_ip=$(ip route | grep default | awk '{print $3}')
 
 # Define proxy control functions
 proxy_on() {

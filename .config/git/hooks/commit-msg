@@ -54,8 +54,8 @@ if ! echo "$first_line" | grep -qE "$format_regex"; then
 fi
 
 # Only check the length of the first line
-if [ ${#first_line} -gt 72 ]; then
-    echo "${RED}${BOLD}ERROR: Subject line too long (max 72 characters)${RESET}"
+if [ ${#first_line} -gt 80 ]; then
+    echo "${RED}${BOLD}ERROR: Subject line too long (max 80 characters)${RESET}"
     exit 1
 fi
 
