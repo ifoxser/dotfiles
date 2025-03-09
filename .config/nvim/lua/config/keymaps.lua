@@ -27,3 +27,4 @@ vim.keymap.set({ "n", "v" }, "L", function()
 end, { desc = "Move right 4 chars" })
 
 vim.keymap.set("n", "<leader>ww", "<C-w>q", { desc = "Quit a window" })
+vim.keymap.set("n", "<leader>v", "ggVG", { desc = "Select entire buffer content" })
