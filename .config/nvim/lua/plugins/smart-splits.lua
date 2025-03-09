@@ -1,3 +1,41 @@
+-- This function turns off the "fixed width" for neo-tree windows
+-- so we can make them bigger or smaller
+local function disable_neotree_winfix()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_is_valid(win) then
+      local buf = vim.api.nvim_win_get_buf(win)
+      local ft = vim.bo[buf].filetype
+
+      if ft == "neo-tree" and vim.wo[win].winfixwidth then
+        if not _G.neotree_winfix_state then
+          _G.neotree_winfix_state = {}
+        end
+        _G.neotree_winfix_state[win] = true
+        vim.wo[win].winfixwidth = false
+      end
+    end
+  end
+end
+
+-- This function puts back the "fixed width" setting
+-- for neo-tree windows after we're done resizing
+local function restore_neotree_winfix()
+  if _G.neotree_winfix_state then
+    for win, was_fixed in pairs(_G.neotree_winfix_state) do
+      if vim.api.nvim_win_is_valid(win) and was_fixed then
+        vim.wo[win].winfixwidth = true
+      end
+    end
+    _G.neotree_winfix_state = {}
+  end
+end
+
+-- We need a place to remember which windows had fixed width
+-- so we can put the setting back later
+if not _G.neotree_winfix_state then
+  _G.neotree_winfix_state = {}
+end
+
 return {
   "mrjones2014/smart-splits.nvim",
   lazy = false,
@@ -12,28 +50,36 @@ return {
     {
       "<A-h>",
       function()
+        disable_neotree_winfix()
         require("smart-splits").resize_left()
+        restore_neotree_winfix()
       end,
       desc = "Resize left",
     },
     {
       "<A-j>",
       function()
+        disable_neotree_winfix()
         require("smart-splits").resize_down()
+        restore_neotree_winfix()
       end,
       desc = "Resize down",
     },
     {
       "<A-k>",
       function()
+        disable_neotree_winfix()
         require("smart-splits").resize_up()
+        restore_neotree_winfix()
       end,
       desc = "Resize up",
     },
     {
       "<A-l>",
       function()
+        disable_neotree_winfix()
         require("smart-splits").resize_right()
+        restore_neotree_winfix()
       end,
       desc = "Resize right",
     },
