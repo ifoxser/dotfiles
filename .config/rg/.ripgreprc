@@ -23,3 +23,9 @@
 --glob=!**/*.arm.o
 --glob=!**/*.mod
 --glob=!**/*.mod.c
+
+# Limit the displayed line length to 1000 characters
+--max-columns=800
+
+# Show preview of truncated lines
+--max-columns-preview

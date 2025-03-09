@@ -413,7 +413,7 @@ bind-key -n M-k if -F "#{@pane-is-vim}" 'send-keys M-k' 'resize-pane -U 3'
 bind-key -n M-l if -F "#{@pane-is-vim}" 'send-keys M-l' 'resize-pane -R 3'
 
 # increase history size
-set -g history-limit 10000
+set -g history-limit 250000
 
 # start with mouse mode enabled
 set -g mouse on
