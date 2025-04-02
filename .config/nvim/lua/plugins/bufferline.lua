@@ -14,6 +14,13 @@ return {
       desc = "Next buffer",
     },
     {
+      "<C-]>",
+      function()
+        vim.cmd("bnext " .. vim.v.count1)
+      end,
+      desc = "Next buffer",
+    },
+    {
       "[<space>",
       function()
         vim.cmd("bprev " .. vim.v.count1)
@@ -21,7 +28,21 @@ return {
       desc = "Previous buffer",
     },
     {
+      "<C-[>",
+      function()
+        vim.cmd("bprev " .. vim.v.count1)
+      end,
+      desc = "Previous buffer",
+    },
+    {
       "<leader><delete>",
+      function()
+        require("snacks").bufdelete()
+      end,
+      desc = "Close current buffer",
+    },
+    {
+      "<C-Del>",
       function()
         require("snacks").bufdelete()
       end,
