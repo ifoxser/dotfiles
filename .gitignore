@@ -13,3 +13,5 @@
 !.local/
 !.local/bin/
 !.local/bin/fd
+!.local/bin/plantuml
+!.local/bin/plantuml.config
