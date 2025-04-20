@@ -27,7 +27,7 @@ check_and_gen_file() {
         return 0
     fi
 
-    echo "==> Checking $file:"
+    echo "Checking $file:"
 
     # Run PlantUML syntax check
     # Pipe file content to PlantUML jar and capture output
@@ -44,9 +44,9 @@ check_and_gen_file() {
     filename=$(basename "$file")
     if [ $exit_code -eq 0 ]; then
         java "${JAVA_OPTS[@]}" -jar "$PLANTUML_JAR" -config "$CONFIG_FILE" "$file"
-        echo -e "${GREEN}${filename}: Generation successful${NC}"
+        echo -e "${GREEN}Generation successful: ${filename}:${NC}"
     else
-        echo -e "${RED}${filename}: Generation failed${NC}"
+        echo -e "${RED}Generation failed: ${filename}${NC}"
     fi
 
     # Add empty line for formatting if not the last file

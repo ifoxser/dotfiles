@@ -64,14 +64,22 @@ vim.keymap.set("n", "<C-p>", function()
   -- Get current file info
   local current_file = vim.fn.expand("%:p")
   local ext = vim.fn.expand("%:e")
-
   -- File type specific operations
   if ext == "puml" or ext == "plantuml" or ext == "pu" or ext == "uml" then
-    -- Execute plantuml command and get both output and return code
-    local output = vim.fn.system(string.format('plantuml "%s"', current_file))
-    output = output:gsub("\27%[[0-9;]*m", ""):gsub("%s+$", "") -- Remove ANSI escape sequences and trailing newline
-    -- Notify with appropriate level based on return code (0 = success, non-zero = error)
-    vim.notify(output, vim.v.shell_error == 0 and vim.log.levels.INFO or vim.log.levels.ERROR)
+    -- Execute plantuml command asynchronously
+    vim.notify("Generating PlantUML diagram...", vim.log.levels.INFO)
+    -- Use vim.system() for async execution (Neovim 0.10+)
+    vim.system({ "plantuml", current_file }, { text = true }, function(obj)
+      local output = obj.stdout or ""
+      -- Remove ANSI escape sequences and trailing whitespace
+      output = output:gsub("\27%[[0-9;]*m", ""):gsub("%s+$", "")
+      -- If no output but we have error output, use that instead
+      if output == "" and obj.stderr ~= "" then
+        output = obj.stderr:gsub("\27%[[0-9;]*m", ""):gsub("%s+$", "")
+      end
+      -- Notify with appropriate level based on return code
+      vim.notify(output, obj.code == 0 and vim.log.levels.INFO or vim.log.levels.ERROR)
+    end)
   elseif ext == "md" then
     -- Reserved for Markdown operations
     vim.notify("Markdown handling not implemented yet", vim.log.levels.WARN)
